@@ -1,19 +1,14 @@
 ---
 layout: page
 menu: false
-date: '2020-02-27 01:53:59'
+date: '2025-02-5 10:01:57'
 title: About
-description: Some description.
+description: My About Page
 permalink: /about/
 ---
 
-<img class="img-rounded" src="/assets/img/uploads/profile.png" alt="Thomas A. Anderson" width="200">
+<img class="img-rounded" src="/assets/img/uploads/profile.jpeg" alt="Ali Vijdaan" width="200">
 
 # About
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+As a Junior AI Student, I strive to take small steps towards a giant leap in the field of Artificial Intelligence. I firmly believe that Algorithms and Coding are not just subjects to study but crucial problem-solving solving skills. I aim to apply these skills in my real life. Additionally, as an active member of AIESEC and ACM (Association for Computing Machinery), I am dedicated to enhancing my soft skills, managerial abilities, and leadership qualities to become a proficient AI scientist.
