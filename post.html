@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter · Ali Vijdaan</title>
+<meta name="description" content="A chapter from Ali Vijdaan's site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;600&family=Lalezar&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+/* ============ READER ============ */
+.reader { padding: 3rem 0 5rem; }
+.col { width: min(70ch, 100% - 2rem); margin-inline: auto; }
+.back { display: inline-block; color: var(--ink-dim); text-decoration: none; font-size: .95rem; margin-bottom: 2.5rem; }
+.back:hover { color: var(--ink); }
+
+.post-head { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); }
+.kicker { font-size: .9rem; color: var(--ink-dim); margin: 0 0 .9rem; }
+.kicker .src { color: var(--sys); }
+.post-head h1 {
+  font-family: "Lalezar", serif; font-weight: 400; font-size: clamp(2.4rem, 7vw, 3.8rem); line-height: 1.02;
+  margin: 0 0 1rem; color: var(--marigold); text-shadow: 2px 2px 0 var(--rose), 4px 4px 0 var(--bg-deep);
+  overflow-wrap: break-word;
+}
+.dek { font-size: 1.2rem; color: var(--ink-dim); margin: 0; }
+.elsewhere { display: inline-block; margin-top: 1rem; font-size: .9rem; color: var(--sys); text-underline-offset: 4px; }
+
+/* the article body, rendered from Markdown */
+.prose { font-size: 1.15rem; line-height: 1.75; overflow-wrap: break-word; }
+.prose > :first-child { margin-top: 0; }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose table, .prose pre, .prose figure, .prose .katex-display { margin: 0 0 1.4rem; }
+.prose h2, .prose h3, .prose h4 { line-height: 1.2; margin: 2.6rem 0 1rem; scroll-margin-top: 80px; }
+.prose h2 { font-family: "Lalezar", serif; font-weight: 400; font-size: 2.1rem; color: var(--marigold); }
+.prose h3 { font-size: 1.4rem; font-weight: 700; }
+.prose h4 { font-size: 1.1rem; font-weight: 700; color: var(--ink-dim); }
+.prose a { color: var(--sys); text-underline-offset: 3px; }
+.prose strong { color: #fff; }
+.prose ul, .prose ol { padding-left: 1.5rem; }
+.prose li { margin: .35rem 0; }
+.prose li::marker { color: var(--rose); }
+.prose blockquote { margin-left: 0; padding: .2rem 0 .2rem 1.2rem; border-left: 3px solid var(--rose); color: var(--ink-dim); font-style: italic; }
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose hr { border: 0; margin: 2.5rem 0; overflow: visible; }
+.prose hr::before { content: "✦  ✦  ✦"; display: block; text-align: center; color: var(--marigold); letter-spacing: .4em; }
+.prose img, .prose video { max-width: 100%; height: auto; border-radius: 6px; display: block; margin-inline: auto; }
+.prose figure { margin-inline: 0; }
+.prose figcaption { text-align: center; color: var(--ink-dim); font-size: .9rem; margin-top: .6rem; }
+
+.prose code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .86em; }
+.prose :not(pre) > code { background: color-mix(in srgb, var(--ink) 10%, transparent); padding: .12em .38em; border-radius: 4px; }
+.prose pre { position: relative; background: var(--bg-deep); border: 1px solid color-mix(in srgb, var(--sys) 30%, transparent); border-radius: 6px; padding: 1rem 1.1rem; overflow-x: auto; line-height: 1.55; font-size: 1rem; }
+.prose pre code.hljs { background: none; padding: 0; }
+.copy { position: absolute; top: .45rem; right: .45rem; font: .75rem "JetBrains Mono", monospace; cursor: pointer; color: var(--ink-dim); background: var(--bg-2); border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); border-radius: 4px; padding: .2rem .5rem; opacity: 0; transition: opacity .15s; }
+.prose pre:hover .copy, .copy:focus-visible { opacity: 1; }
+@media (hover: none) { .copy { opacity: 1; } .prose pre { padding-top: 2.2rem; } }
+
+.prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: .3rem 0; }
+.prose .katex { font-size: 1.08em; }
+
+.prose table { border-collapse: collapse; display: block; overflow-x: auto; font-size: 1rem; }
+.prose th, .prose td { border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); padding: .45rem .8rem; text-align: left; }
+.prose th { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+
+/* previous / next chapter */
+.post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); }
+.post-nav:empty { display: none; }
+.post-nav a { text-decoration: none; display: block; padding: .9rem 1rem; border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); border-radius: 6px; }
+.post-nav a:hover { border-color: var(--marigold); }
+.post-nav small { display: block; color: var(--ink-dim); font-size: .82rem; margin-bottom: .2rem; }
+.post-nav .next { grid-column: 2; text-align: right; }
+@media (max-width: 560px) { .post-nav { grid-template-columns: 1fr; } .post-nav .next { grid-column: 1; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">vijdaan</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="index.html#quests">Quests</a></li>
+        <li><a href="index.html#chapters">Chapters</a></li>
+        <li><a href="index.html#library">Library</a></li>
+      </ul>
+    </nav>
+    <button class="bored" id="bored" type="button" title="Change the colour scheme">Bored? Repaint</button>
+  </div>
+</header>
+
+<main class="reader">
+  <article class="col">
+    <a class="back" href="index.html#chapters">← All chapters</a>
+    <header class="post-head" id="postHead"></header>
+    <div class="prose" id="prose"><p style="color:var(--ink-dim)">Loading chapter…</p></div>
+    <nav class="post-nav" id="postNav" aria-label="More chapters"></nav>
+  </article>
+</main>
+
+<div class="jhalar" aria-hidden="true"></div>
+<p class="fine" id="fine"></p>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="assets/common.js"></script>
+<script>
+/* =====================================================================
+   Reads a chapter: post.html?p=my-post renders content/posts/my-post.md.
+   Title, date and excerpt come from its entry in content/chapters.yml.
+   ===================================================================== */
+const POSTS_DIR = "content/posts/";
+const slug = new URLSearchParams(location.search).get("p") || "";
+
+/* ---------- math: $inline$, $$display$$ (same syntax GitHub uses) ---------- */
+const tex = (src, displayMode) => window.katex
+  ? katex.renderToString(src, { displayMode, throwOnError: false })
+  : `<code>${esc(src)}</code>`;
+marked.use({
+  gfm: true,
+  extensions: [
+    {
+      name: "mathBlock", level: "block",
+      start: (src) => src.match(/^ {0,3}\$\$/m)?.index,
+      tokenizer(src) {
+        const m = /^ {0,3}\$\$([\s\S]+?)\$\$[ \t]*(?:\n+|$)/.exec(src);
+        if (m) return { type: "mathBlock", raw: m[0], text: m[1].trim() };
+      },
+      renderer: (t) => tex(t.text, true) + "\n",
+    },
+    {
+      name: "mathInline", level: "inline",
+      start: (src) => { const i = src.indexOf("$"); return i < 0 ? undefined : i; },
+      tokenizer(src) {
+        // $…$ must hug its contents and can't be followed by a digit, so "$5 and $10" stays money
+        const m = /^\$\$((?:\\.|[^\\$])+?)\$\$/.exec(src) || /^\$(?!\s)((?:\\.|[^\\$])+?)(?<=\S)\$(?!\d)/.exec(src);
+        if (m) return { type: "mathInline", raw: m[0], text: m[1], display: m[0].startsWith("$$") };
+      },
+      renderer: (t) => tex(t.text, t.display),
+    },
+  ],
+});
+
+/* ---------- tidy the rendered article: images, links, code, headings ---------- */
+const isRelative = (u) => u && !/^([a-z][a-z0-9+.-]*:|\/|#|\?)/i.test(u);
+const slugify = (s) => s.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
+
+function enhance(root) {
+  const base = new URL(POSTS_DIR, location.href);
+
+  // paths in the .md are relative to content/posts/, like they are on github.com
+  root.querySelectorAll("img[src], video[src], audio[src], source[src]").forEach(el => {
+    const src = el.getAttribute("src");
+    if (isRelative(src)) el.src = new URL(src, base).href;
+    if (el.tagName === "IMG") el.loading = "lazy";
+  });
+  root.querySelectorAll("a[href]").forEach(a => {
+    const href = a.getAttribute("href");
+    const md = /^(?:\.\/)?([\w-]+)\.md(#.*)?$/.exec(href);
+    if (md) a.href = postUrl(md[1]) + (md[2] || "");   // [link](other-post.md) → that chapter here
+    else if (isRelative(href)) a.href = new URL(href, base).href;
+    else if (/^https?:/.test(href) && a.host !== location.host) { a.target = "_blank"; a.rel = "noopener"; }
+  });
+
+  // an image on its own line becomes a figure; its "title" is the caption
+  root.querySelectorAll("p > img:only-child").forEach(img => {
+    const p = img.parentElement;
+    if (p.textContent.trim()) return;
+    const fig = document.createElement("figure");
+    fig.append(img);
+    if (img.title) { const cap = document.createElement("figcaption"); cap.textContent = img.title; fig.append(cap); img.removeAttribute("title"); }
+    p.replaceWith(fig);
+  });
+
+  // ```math fences render as display math; everything else gets highlighted + a copy button
+  root.querySelectorAll("pre > code").forEach(code => {
+    const pre = code.parentElement;
+    if (code.classList.contains("language-math")) {
+      const div = document.createElement("div"); div.innerHTML = tex(code.textContent, true); pre.replaceWith(div.firstChild); return;
+    }
+    if (window.hljs && /\blanguage-(?!plaintext|text\b)/.test(code.className)) hljs.highlightElement(code);
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "copy"; btn.textContent = "copy";
+    btn.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(code.textContent); btn.textContent = "copied"; }
+      catch (e) { btn.textContent = "press ctrl+c"; }
+      setTimeout(() => btn.textContent = "copy", 1500);
+    });
+    pre.append(btn);
+  });
+
+  // linkable headings
+  const used = new Set();
+  root.querySelectorAll("h2, h3, h4").forEach(h => {
+    let id = slugify(h.textContent) || "section", n = 1;
+    while (used.has(id)) id = `${slugify(h.textContent)}-${++n}`;
+    used.add(id); h.id = h.id || id;
+  });
+}
+
+/* ---------- page ---------- */
+const sourceName = (url) => {
+  try { const host = new URL(url).hostname.replace(/^www\./, ""); return /medium\.com$/.test(host) ? "Medium" : host; }
+  catch (e) { return null; }
+};
+
+function renderHead(entry, minutes) {
+  const meta = [`<span class="src">${esc(entry.source || "Blog")}</span>`];
+  if (entry.date) meta.push(fmtDate(entry.date));
+  if (minutes) meta.push(`${esc(minutes)} min read`);
+  const also = /^https?:/.test(entry.url || "") ? sourceName(entry.url) : null;
+  $("#postHead").innerHTML = `
+    <p class="kicker">${meta.join(" · ")}</p>
+    <h1>${esc(entry.title)}</h1>
+    ${entry.excerpt ? `<p class="dek">${esc(entry.excerpt)}</p>` : ""}
+    ${also ? `<a class="elsewhere" href="${esc(entry.url)}" target="_blank" rel="noopener">Also on ${esc(also)} ↗</a>` : ""}`;
+  document.title = `${entry.title} · ${PROFILE.name || "Ali Vijdaan"}`;
+  if (entry.excerpt) document.querySelector('meta[name="description"]').content = entry.excerpt;
+}
+
+function renderNav(posts, entry) {
+  const onSite = posts.filter(p => p.post).sort((a, b) => toDate(a.date) - toDate(b.date));
+  const i = onSite.findIndex(p => p.post === entry.post);
+  if (i < 0) return;
+  const link = (p, cls, label) => p ? `<a class="${cls}" href="${postUrl(p.post)}"><small>${label}</small>${esc(p.title)}</a>` : "";
+  $("#postNav").innerHTML = link(onSite[i - 1], "prev", "← Previous chapter") + link(onSite[i + 1], "next", "Next chapter →");
+}
+
+let PROFILE = {};
+(async () => {
+  const fail = (msg) => { $("#postHead").innerHTML = ""; $("#prose").innerHTML = problem(msg); };
+  if (!window.jsyaml || !window.marked) return fail("The page's reading tools didn't load. Check your connection and reload.");
+  if (!/^[\w-]+$/.test(slug)) return fail(slug ? `"${slug}" isn't a valid chapter name.` : "No chapter picked. Head back to the chapter list.");
+
+  const [profile, chapters, md] = await Promise.all([
+    load("profile"), load("chapters"),
+    fetchText(`${POSTS_DIR}${slug}.md`).then(text => ({ text }), e => ({ error: e.message })),
+  ]);
+  PROFILE = profile.data || {};
+  $("#fine").textContent = `© ${new Date().getFullYear()} ${PROFILE.name || "Ali Vijdaan"}. Fasla rakhein. Keep a safe distance from my side projects.`;
+  if (md.error) return fail(`Couldn't find this chapter (looked for ${POSTS_DIR}${slug}.md). It may have moved.`);
+
+  const posts = list(chapters.data);
+  const entry = { source: "Blog", ...(posts.find(p => p.post === slug) || { post: slug }) };
+
+  const prose = $("#prose");
+  prose.innerHTML = marked.parse(md.text.replace(/^﻿/, ""));
+  // a leading "# Title" in the .md is used as the title when chapters.yml doesn't give one (handy for drafts)
+  const h1 = prose.firstElementChild?.tagName === "H1" ? prose.firstElementChild : null;
+  if (h1) { entry.title = entry.title || h1.textContent; h1.remove(); }
+  entry.title = entry.title || slug.replace(/-/g, " ");
+  enhance(prose);
+
+  const words = prose.textContent.trim().split(/\s+/).length;
+  renderHead(entry, entry.minutes || Math.max(1, Math.round(words / 230)));
+  renderNav(posts, entry);
+  if (chapters.error) prose.insertAdjacentHTML("beforebegin", problem(chapters.error));
+
+  if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
+})();
+</script>
+</body>
+</html>

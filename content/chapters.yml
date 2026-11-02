@@ -1,0 +1,60 @@
+# ─────────────────────────────────────────────────────────────
+# CHAPTERS: your writing. Order doesn't matter: chapters are
+# sorted and numbered by date automatically.
+#
+# Medium posts load by themselves (set medium_username in
+# profile.yml), so you only need to list them here if they're
+# older than Medium's last ~10, or also published on this site.
+#
+# ── A chapter people read HERE, on this site ──
+# 1. Write it as a Markdown file in content/posts/, e.g.
+#    content/posts/my-first-post.md (no title line inside).
+#    Pictures go in content/posts/images/.
+# 2. Add a block like this. `post` is the file name without .md:
+#
+#   - title: "Your post title"
+#     date: 2026-11-02
+#     post: my-first-post
+#     excerpt: "One line about the post."
+#     minutes: 5              # optional, worked out for you if left out
+#     url: https://medium.com/...   # optional: also on Medium? link it here
+#
+# ── A chapter that lives somewhere ELSE (Dev.to, an old Medium post) ──
+#
+#   - title: "Your post title"
+#     date: 2026-11-02
+#     source: Medium          # Medium, Dev.to, anything
+#     url: https://...
+#     minutes: 5              # optional
+#     excerpt: "One line about the post."
+# ─────────────────────────────────────────────────────────────
+
+# Example: shows off Markdown, code, math and pictures. Delete it
+# (and content/posts/example.md) once your first real chapter is up.
+- title: "Using Terraform to Create IAM, VPC and EC2 Instances."
+  date: 2025-12-31
+  source: Medium
+  url: "https://medium.com/@alivijdaan/using-terraform-to-create-iam-vpc-and-ec2-instances-f6fc607ca271"
+  minutes: 5
+  excerpt: "We will be learning how to create IAM Users, VPCs with their own routing tables, security groups, subnets and EC2 Instances."
+
+- title: "Github Workflows with OICD and AWS"
+  date: 2025-12-31
+  source: Medium
+  url: "https://medium.com/@alivijdaan/github-workflows-with-oicd-and-aws-15b987712fdb"
+  minutes: 5
+  excerpt: "Creating Github Workflows/Actions using OICD for better AWS Compatibility"
+
+- title: "Never Struggle with Skewed Data Again"
+  date: 2024-06-22
+  source: Medium
+  url: "https://medium.com/@alivijdaan/never-struggle-with-skewed-data-again-a3a688ebce04"
+  minutes: 4
+  excerpt: "The article will give a through explanation on what skewed data is, why its bad for your models and how you can identify and fix such data."
+
+- title: "Finding the Best Model For You — A Guide to Grid Search CV"
+  date: 2024-06-19
+  source: Medium
+  url: "https://medium.com/@alivijdaan/finding-the-best-model-for-you-a-guide-to-grid-search-cv-18f3939b778c"
+  minutes: 2
+  excerpt: "I remember first starting out as a data scientist and manually changing hyper-parameters for hours. It was frustrating. That was until I started using GridSearchCV."

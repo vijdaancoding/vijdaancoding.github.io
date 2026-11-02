@@ -1,0 +1,73 @@
+# ─────────────────────────────────────────────────────────────
+# QUEST LOG: things you're doing at work.
+# Shown in the order written here, so put the newest at the top.
+#
+# Copy this block to add a quest:
+#
+#   - title: What you're building
+#     kind: Main              # Main or Side
+#     status: In progress     # In progress or Cleared
+#     summary: >
+#       Two or three sentences about the problem and what you did.
+#     rewards:
+#       - Something you learned
+#     stack: [Python, Docker]
+#     url: https://github.com/...   # optional: adds a "Visit project" button
+# ─────────────────────────────────────────────────────────────
+
+- title: Detecting Media Bias with LLMs
+  kind: Main
+  status: In progress
+  summary: >
+    News articles have the power to shape how we perceive the world. This project uses AI to identify articles that portray Muslims in a biased or unfair manner.
+  rewards:
+    - Learned how to Prompt Engineer
+    - Using LLMs as a Judge, Meta Prompting and Adversarial Prompting 
+  stack: [Python]
+
+- title: Advanced Multi-Modal RAG in n8n
+  kind: Main
+  status: Cleared
+  summary: >
+    Worked with real world data from HubSpot to create Production ready multi-modal RAG. 
+  rewards:
+    - One of my first projects that actually went to Prod and is currently being used by users
+    - Learned that real world data is f*cking messy. From unstructured videos, images, documents and text. Its a nightmare!
+    - I learned about the Pros and Cons of using n8n in businesses.
+  stack: [n8n]
+
+- title: Rescue AI - Emergency Voice Agent in Urdu
+  kind: Main
+  status: Cleared
+  summary: >
+    Our Final-Year Project was a STT-LLM-TTS workflow with Spam and Priority Detection. Hooked with twillio it was able to receive calls and alert relevant authorities.  
+  rewards:
+    - Training and deploying STT/TTS models
+    - Learning how to incorporate AI Models with Software Engineering
+  stack: [Python, TypeScript, Docker]
+  url: https://github.com/vijdaancoding/rescue-ai
+
+- title: Sehat-Link - AI Healthcare
+  kind: Side
+  status: Cleared
+  summary: >
+    Became x3 Hackathon winner after this. Creating an Agentic System that is smart enough to use the tools, agents and custom LLMs on its own to cater to patients.
+  rewards:
+    - Learned about AI Agents that are able to orchestrate and communicate with one another
+    - Pitching technical projects to investors and shareholders
+    - Hackathon Bragging Rights
+  stack: [Python, Javascript]
+  url: "https://github.com/sehat-inc/sehat-link"
+  
+- title: Inventory Optimization via Deep Learning
+  kind: Side
+  status: Cleared
+  summary: >
+    Became x2 Hackathon winner after this. Uses a trained ensemble of MLP, LSTM, CNN and a Meta Learner to forecast daily demand.
+  rewards:
+    - Learned to train core ML and Deep Learning Models to provide comparative analytics
+    - Hackathon Bragging Rights
+  stack: [Python]
+  url: "https://github.com/sehat-inc/OneAI_InventoryOptimization"
+  
+  

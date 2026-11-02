@@ -1,0 +1,57 @@
+# ─────────────────────────────────────────────────────────────
+# PROFILE: the hero, the status window and your links.
+# Wrap words in *asterisks* in the intro to highlight them.
+# ─────────────────────────────────────────────────────────────
+
+name: Ali Vijdaan
+intro: "Developer from Pakistan. I build things at work, I'm *chronically online*, and I read novels after hours. Then I write about all of it."
+
+# Your Medium username, without the @. Posts appear in Chapters automatically.
+# Leave it empty ("") to show only what's in chapters.yml.
+medium_username: ""
+
+links:
+  - label: GitHub
+    url: https://github.com/vijdaancoding
+  - label: Medium
+    url: https://medium.com/          # ← your Medium profile
+  - label: LinkedIn
+    url: https://www.linkedin.com/    # ← your LinkedIn profile
+
+# Rows in the status window. Add `debuff: true` to show a row in pink.
+status:
+  - label: Name
+    value: Ali Vijdaan
+  - label: Class
+    value: AI Engineer
+  - label: Origin
+    value: Pakistan
+  - label: Debuff
+    value: Will start a new novel instead of the side project
+    debuff: true
+
+# Stat bars, 0 to 100. `display` replaces the number. `low: true` makes the bar pink.
+stats:
+  - label: Curiosity
+    value: 96
+  - label: Debugging
+    value: 84
+  - label: Chai tolerance
+    value: 100
+    display: MAX
+  - label: Ignoring bugs
+    value: 8
+    low: true
+
+skills:
+  - Python
+  - ML/DL
+  - React
+  - SQL
+  - Git
+  - Docker
+  - AWS
+  - Terraform
+  - n8n
+  - Prompt Engineering
+  - Reading 3 novels at once

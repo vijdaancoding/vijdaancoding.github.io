@@ -1,0 +1,84 @@
+/* Shared by index.html and post.html: themes, base type, nav, footer line, toast. */
+
+/* ============ THEMES (the "Bored?" button cycles these) ============ */
+:root, [data-theme="raat"] {
+  --bg: #0F1538;        /* ajrak indigo night */
+  --bg-2: #18205A;
+  --bg-deep: #080B22;
+  --ink: #F2E9D8;
+  --ink-dim: #B9B3C9;
+  --sys: #7DE2FF;       /* webnovel system-window cyan */
+  --marigold: #F7B32B;
+  --rose: #EF3E74;
+  --emerald: #14A774;
+  --crimson: #C0263A;
+}
+[data-theme="ajrak"] {
+  --bg: #2B0A12; --bg-2: #43121D; --bg-deep: #170408;
+  --ink: #F6EADB; --ink-dim: #CDB4AE;
+  --marigold: #F2C14E; --rose: #3F7BD9; --emerald: #E2E2E2; --crimson: #1F2F6B;
+}
+[data-theme="zumurrud"] {
+  --bg: #04271F; --bg-2: #0A3B30; --bg-deep: #021611;
+  --ink: #F1ECD9; --ink-dim: #AFC4B9;
+  --marigold: #E9B949; --rose: #E0577A; --emerald: #7FD1AE; --crimson: #8E2B4B;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: linear-gradient(color-mix(in srgb, var(--bg) 93%, transparent), color-mix(in srgb, var(--bg) 93%, transparent)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23F2E9D8' stroke-width='1.4'%3E%3Cpath d='M32 6l7 19 19 7-19 7-7 19-7-19-19-7 19-7z'/%3E%3Ccircle cx='32' cy='32' r='4'/%3E%3Ccircle cx='0' cy='0' r='6'/%3E%3Ccircle cx='64' cy='0' r='6'/%3E%3Ccircle cx='0' cy='64' r='6'/%3E%3Ccircle cx='64' cy='64' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: auto, 64px 64px;
+  color: var(--ink);
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  transition: background-color .5s ease, color .5s ease;
+  -webkit-font-smoothing: antialiased;
+}
+main, header, footer { position: relative; z-index: 1; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--sys); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: min(1120px, 100% - 3rem); margin-inline: auto; }
+.urdu { font-family: "Noto Nastaliq Urdu", serif; direction: rtl; line-height: 2; }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ============ NAV ============ */
+.nav {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+.nav .wrap { display: flex; align-items: center; gap: 1.5rem; height: 60px; }
+.brand { font-family: "Lalezar", serif; font-size: 1.5rem; text-decoration: none; color: var(--marigold); line-height: 1; padding-top: 4px; }
+.nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; margin-left: auto; }
+.nav ul a { text-decoration: none; color: var(--ink-dim); font-size: .95rem; }
+.nav ul a:hover { color: var(--ink); }
+.bored {
+  font: inherit; font-size: .9rem; cursor: pointer;
+  color: var(--bg-deep); background: var(--marigold);
+  border: 0; border-radius: 999px; padding: .4rem .9rem; font-weight: 600;
+  box-shadow: 2px 2px 0 var(--rose);
+}
+.bored:active { transform: translate(2px,2px); box-shadow: none; }
+@media (max-width: 760px) { .nav ul { display: none; } .bored { margin-left: auto; } }
+
+/* ============ JHALAR (truck chain-fringe divider) ============ */
+.jhalar { height: 30px; position: relative; z-index: 1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='30' viewBox='0 0 28 30'%3E%3Crect width='28' height='4' fill='%23C0263A'/%3E%3Cpath d='M7 4v14M21 4v8' stroke='%23E8E2D2' stroke-width='1.2' stroke-dasharray='2 1.5'/%3E%3Cpath d='M3 19h8l-1.5 6h-5z' fill='%23F7B32B'/%3E%3Ccircle cx='7' cy='27' r='1.6' fill='%23F7B32B'/%3E%3Ccircle cx='21' cy='15' r='3.6' fill='%23EF3E74'/%3E%3C/svg%3E") repeat-x 0 0 / 28px 30px; }
+
+.fine { text-align: center; font-size: .82rem; color: var(--ink-dim); padding: 2.2rem 0 2rem; background: var(--bg-deep); margin-top: 0; }
+
+/* content errors (shown when a .yml or .md file has a problem) */
+.content-error { font-family: "JetBrains Mono", monospace; font-size: .85rem; color: #FFD0DA; background: rgba(239,62,116,.15); border-left: 3px solid var(--rose); padding: .8rem 1rem; margin: 0 0 1rem; }
+
+/* toast */
+.toast { position: fixed; bottom: 1.25rem; left: 50%; transform: translate(-50%, calc(100% + 2rem)); visibility: hidden; z-index: 60;
+  font-family: "JetBrains Mono", monospace; font-size: .85rem; background: rgba(8,20,60,.92); color: #E4F7FF;
+  border: 1px solid var(--sys); padding: .6rem 1rem; border-radius: 4px; box-shadow: 0 0 20px rgba(125,226,255,.3);
+  transition: transform .3s ease; max-width: calc(100% - 2rem); }
+.toast.show { transform: translate(-50%, 0); visibility: visible; }

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ali Vijdaan</title>
+<meta name="description" content="Ali Vijdaan — developer, webnovel reader, chai enthusiast. Writing, work quests and what I'm reading.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;600&family=Lalezar&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+/* ============ HERO ============ */
+.hero { min-height: calc(100svh - 60px); display: grid; align-content: center; position: relative; overflow: hidden; padding: 3rem 0 7rem; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+.welcome { font-size: 1.6rem; line-height: 2.2; color: var(--marigold); margin: 0; display: block; width: fit-content; }
+.welcome-en { color: var(--ink-dim); font-size: .95rem; margin: .4rem 0 1.25rem; }
+.name {
+  font-family: "Lalezar", serif; font-weight: 400;
+  font-size: clamp(4rem, 11vw, 8.5rem); line-height: .86; margin: 0 0 1.5rem;
+  color: var(--marigold);
+  text-shadow: 3px 3px 0 var(--rose), 6px 6px 0 var(--emerald), 10px 10px 0 var(--bg-deep);
+  letter-spacing: .01em;
+}
+.name span { display: block; }
+.name span + span { color: var(--ink); }
+.intro { max-width: 34ch; font-size: 1.2rem; color: var(--ink); margin: 0 0 1.25rem; }
+.intro em { font-style: normal; color: var(--sys); }
+.replay {
+  font: inherit; font-size: .9rem; background: none; border: 1px dashed color-mix(in srgb, var(--ink) 35%, transparent);
+  color: var(--ink-dim); padding: .45rem .9rem; border-radius: 8px; cursor: pointer;
+}
+.replay:hover { color: var(--ink); border-color: var(--ink); }
+
+/* system window */
+.sys {
+  font-family: "JetBrains Mono", monospace; font-size: .86rem; line-height: 1.6;
+  background: linear-gradient(180deg, #14306A, #0B1A48);
+  border: 1px solid var(--sys);
+  box-shadow: 0 0 0 1px rgba(125,226,255,.15), 0 0 28px rgba(125,226,255,.28), inset 0 0 40px rgba(125,226,255,.08);
+  border-radius: 6px; color: #E4F7FF; position: relative;
+}
+.sys::before, .sys::after { content: ""; position: absolute; width: 14px; height: 14px; border: 2px solid var(--sys); }
+.sys::before { top: -5px; left: -5px; border-right: 0; border-bottom: 0; }
+.sys::after { bottom: -5px; right: -5px; border-left: 0; border-top: 0; }
+.sys-head { display: flex; justify-content: center; padding: .6rem 1rem; border-bottom: 1px solid rgba(125,226,255,.35); color: var(--sys); letter-spacing: .08em; }
+.sys-body { padding: 1rem 1.25rem 1.25rem; }
+.sys-msg { color: #fff; min-height: 3.2em; margin: 0 0 .9rem; }
+.sys-msg .cursor { display: inline-block; width: .55em; height: 1em; background: var(--sys); vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.stat-table { width: 100%; border-collapse: collapse; margin-bottom: .9rem; }
+.stat-table th { text-align: left; font-weight: 400; color: rgba(228,247,255,.65); padding: .15rem 0; width: 38%; vertical-align: top; }
+.stat-table td { padding: .15rem 0; }
+.stat-table .debuff { color: #FF8FA8; }
+.bars { display: grid; gap: .45rem; margin: 0 0 .9rem; }
+.bar { display: grid; grid-template-columns: 9.5rem 1fr 3rem; gap: .6rem; align-items: center; }
+.bar-track { height: 8px; background: rgba(125,226,255,.14); border-radius: 2px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--sys); width: 0; transition: width 1.2s cubic-bezier(.2,.8,.2,1); box-shadow: 0 0 10px var(--sys); }
+.bar.low .bar-fill { background: #FF8FA8; box-shadow: 0 0 10px #FF8FA8; }
+.bar-val { text-align: right; color: rgba(228,247,255,.8); }
+.skills { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.1rem; padding: 0; list-style: none; }
+.skills li { border: 1px solid rgba(125,226,255,.45); padding: .1rem .5rem; border-radius: 3px; font-size: .78rem; }
+.sys-actions { display: flex; gap: .75rem; }
+.sys-btn {
+  flex: 1; font: inherit; cursor: pointer; color: #E4F7FF;
+  background: rgba(125,226,255,.08); border: 1px solid var(--sys); padding: .55rem; border-radius: 3px;
+}
+.sys-btn:hover { background: rgba(125,226,255,.2); }
+.sys-btn.no { border-color: rgba(255,143,168,.7); }
+@media (max-width: 480px) { .bar { grid-template-columns: 7.5rem 1fr 2.4rem; } .sys { font-size: .78rem; } }
+
+/* window entrance */
+.sys-wrap { opacity: 0; transform: scale(.94); }
+.sys-wrap.open { opacity: 1; transform: none; transition: opacity .45s ease, transform .45s cubic-bezier(.2,1.4,.4,1); }
+
+/* road + truck */
+.road { position: absolute; left: 0; right: 0; bottom: 2.2rem; height: 3px;
+  background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 35%, transparent) 0 28px, transparent 28px 52px); }
+.truck { position: absolute; bottom: 2.3rem; left: 0; width: 300px; transform: translateX(-340px); pointer-events: none; visibility: hidden; }
+.truck.drive { visibility: visible; }
+@media (max-width: 600px) { .truck { width: 200px; } }
+.truck.drive { animation: drive 1.9s cubic-bezier(.55,0,.75,.6) forwards; }
+@keyframes drive {
+  0% { transform: translateX(-340px); }
+  100% { transform: translateX(calc(100vw + 40px)); }
+}
+.truck .wheel { transform-box: fill-box; transform-origin: center; }
+.truck.drive .wheel { animation: spin .35s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* impact: a glow burst on the status window when the truck hits */
+.sys-wrap.impact .sys { animation: impact .6s ease-out; }
+@keyframes impact { 0% { box-shadow: 0 0 0 1px rgba(125,226,255,.15), 0 0 90px 30px rgba(125,226,255,.75); } 100% { box-shadow: 0 0 0 1px rgba(125,226,255,.15), 0 0 28px rgba(125,226,255,.28); } }
+/* safety net: final visible state that does not depend on transitions finishing */
+.sys-wrap.settled { opacity: 1 !important; transform: none !important; }
+
+/* ============ SECTIONS ============ */
+section.block { padding: 6rem 0 4rem; }
+.sec-head { display: flex; align-items: baseline; gap: 1.25rem; flex-wrap: wrap; margin-bottom: .5rem; }
+.sec-head h2 { font-family: "Lalezar", serif; font-weight: 400; font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1; margin: 0; color: var(--ink); }
+.sec-head .urdu { font-size: 1.6rem; color: var(--marigold); line-height: 1.4; }
+.sec-lede { color: var(--ink-dim); max-width: 60ch; margin: 0 0 2.5rem; }
+
+/* quests */
+.quests { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 2rem; align-items: start; }
+@media (max-width: 860px) { .quests { grid-template-columns: 1fr; } }
+.quest-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
+.quest-btn {
+  width: 100%; text-align: left; font: inherit; color: var(--ink); cursor: pointer;
+  background: none; border: 0; border-left: 3px solid transparent; padding: .8rem 1rem;
+  display: grid; grid-template-columns: auto 1fr; gap: .1rem 1rem; align-items: baseline;
+}
+.quest-btn:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.quest-btn[aria-selected="true"] { border-left-color: var(--sys); background: color-mix(in srgb, var(--sys) 9%, transparent); }
+.q-kind { font-size: .8rem; color: var(--marigold); grid-row: span 2; width: 4.5rem; }
+.q-kind.side { color: var(--ink-dim); }
+.q-title { font-weight: 600; font-size: 1.08rem; }
+.q-status { font-size: .85rem; color: var(--ink-dim); }
+.q-status.cleared { color: var(--emerald); }
+.quest-detail .sys-body { padding: 1.4rem 1.5rem 1.6rem; }
+.quest-detail h3 { font-family: "Bricolage Grotesque", sans-serif; font-size: 1.35rem; margin: 0 0 .8rem; color: #fff; line-height: 1.25; }
+.quest-detail p { margin: 0 0 1rem; color: #D7EEF7; font-family: "Bricolage Grotesque", sans-serif; font-size: 1rem; line-height: 1.6; }
+.quest-detail h4 { margin: 1.1rem 0 .4rem; color: var(--sys); font-weight: 400; font-size: .85rem; }
+.quest-detail ul.rewards { margin: 0; padding-left: 1.1rem; font-family: "Bricolage Grotesque", sans-serif; font-size: .98rem; color: #E4F7FF; }
+.quest-link { display: inline-block; margin-top: 1.3rem; padding: .55rem 1.1rem; text-decoration: none; }
+
+/* chapters */
+.filters { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.chip { font: inherit; font-size: .9rem; cursor: pointer; color: var(--ink-dim); background: none; border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent); border-radius: 999px; padding: .3rem .9rem; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.toc { list-style: none; margin: 0; padding: 0; border-top: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); }
+.toc li { border-bottom: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); }
+.toc a { display: grid; grid-template-columns: 5.5rem minmax(0,1fr) auto; gap: 1.25rem; padding: 1.15rem .25rem; text-decoration: none; align-items: baseline; }
+.toc a:hover .t-title { color: var(--marigold); }
+.t-num { font-family: "Lalezar", serif; font-size: 1.35rem; color: var(--rose); line-height: 1; }
+.t-title { font-size: 1.2rem; font-weight: 600; display: block; transition: color .15s; }
+.t-ex { color: var(--ink-dim); font-size: .95rem; display: block; max-width: 65ch; margin-top: .2rem; }
+.t-meta { font-size: .85rem; color: var(--ink-dim); text-align: right; white-space: nowrap; }
+.t-src { display: block; color: var(--sys); }
+@media (max-width: 640px) { .toc a { grid-template-columns: 3.4rem 1fr; } .t-meta { grid-column: 2; text-align: left; } .t-src { display: inline; margin-right: .6rem; } }
+.toc-note { color: var(--ink-dim); font-size: .85rem; margin-top: 1rem; }
+
+/* library */
+.shelf { display: flex; align-items: flex-end; gap: 6px; overflow-x: auto; padding: 1rem .25rem 0; border-bottom: 10px solid #5A3A22; box-shadow: 0 14px 0 -4px rgba(0,0,0,.35); scrollbar-width: thin; }
+.spine {
+  flex: 0 0 auto; width: 54px; cursor: pointer; border: 0; padding: .8rem 0; font: inherit;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: "Lalezar", serif; font-size: 1.05rem; line-height: 1; letter-spacing: .02em;
+  border-radius: 3px 3px 0 0; position: relative;
+  box-shadow: inset -6px 0 0 rgba(0,0,0,.18), inset 6px 0 0 rgba(255,255,255,.08);
+  transition: transform .2s ease;
+}
+.spine::after { content: ""; position: absolute; left: 8px; right: 8px; top: 10px; height: 4px; background: currentColor; opacity: .5; }
+.spine:hover, .spine[aria-pressed="true"] { transform: rotate(180deg) translateY(12px); }
+.spine.dropped { opacity: .55; }
+.spine-card { margin-top: 2rem; display: grid; grid-template-columns: auto 1fr; gap: .2rem 1.5rem; max-width: 640px; min-height: 6rem; }
+.spine-card .k { color: var(--ink-dim); font-size: .9rem; }
+.spine-card .v { font-size: 1rem; }
+.spine-card h3 { grid-column: 1 / -1; margin: 0 0 .5rem; font-family: "Lalezar", serif; font-weight: 400; font-size: 2rem; line-height: 1.1; color: var(--marigold); }
+.legend { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: .85rem; color: var(--ink-dim); margin-bottom: 1rem; }
+
+/* ============ FOOTER ============ */
+.foot-jhalar { margin-top: 5rem; }
+.foot { background: var(--bg-deep); padding-top: 2.5rem; }
+.foot-links { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 2rem; }
+.foot-links a { color: var(--ink); text-decoration-color: var(--marigold); text-underline-offset: 4px; font-size: 1.05rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .truck.drive, .truck.drive .wheel, .sys-wrap.impact .sys, .sys-msg .cursor { animation: none; }
+  .sys-wrap.open, .bar-fill, .spine { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">vijdaan</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#quests">Quests</a></li>
+        <li><a href="#chapters">Chapters</a></li>
+        <li><a href="#library">Library</a></li>
+      </ul>
+    </nav>
+    <button class="bored" id="bored" type="button" title="Change the colour scheme">Bored? Repaint</button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Introduction">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="welcome urdu" lang="ur">خوش آمدید</p>
+        <p class="welcome-en">Khush aamdeed. You made it.</p>
+        <h1 class="name" id="heroName"><span>Ali</span><span>Vijdaan</span></h1>
+        <p class="intro" id="heroIntro"></p>
+        <button class="replay" id="replay" type="button">Summon Truck-kun again</button>
+      </div>
+
+      <div class="sys-wrap" id="sysWrap">
+        <div class="sys" role="region" aria-label="Status window">
+          <div class="sys-head">[ STATUS ]</div>
+          <div class="sys-body">
+            <p class="sys-msg" id="sysMsg" aria-live="polite"></p>
+            <table class="stat-table" id="statTable"></table>
+            <div class="bars" id="bars"></div>
+            <ul class="skills" id="skills" aria-label="Skills"></ul>
+            <div class="sys-actions">
+              <button class="sys-btn" id="accept" type="button">[ Accept quest ]</button>
+              <button class="sys-btn no" id="decline" type="button">[ Decline ]</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="road" aria-hidden="true"></div>
+    <svg class="truck" id="truck" viewBox="0 0 360 190" aria-hidden="true">
+      <!-- crown (taj) over the cab -->
+      <path d="M232 62 Q238 8 290 6 Q342 8 346 62 Z" fill="#F7B32B"/>
+      <path d="M244 60 Q250 20 290 18 Q330 20 336 60 Z" fill="#C0263A"/>
+      <path d="M258 58 Q262 32 290 30 Q318 32 322 58 Z" fill="#14A774"/>
+      <circle cx="290" cy="44" r="7" fill="#F7B32B"/><circle cx="290" cy="44" r="3" fill="#EF3E74"/>
+      <circle cx="262" cy="50" r="3" fill="#fff"/><circle cx="318" cy="50" r="3" fill="#fff"/>
+      <!-- cargo body -->
+      <rect x="14" y="40" width="214" height="108" rx="6" fill="#1F4FBF"/>
+      <rect x="14" y="40" width="214" height="16" fill="#F7B32B"/>
+      <g fill="#EF3E74"><path d="M14 56h214v6H14z"/></g>
+      <!-- painted panels -->
+      <rect x="24" y="68" width="62" height="62" rx="4" fill="#14A774"/>
+      <rect x="92" y="68" width="62" height="62" rx="4" fill="#C0263A"/>
+      <rect x="160" y="68" width="60" height="62" rx="4" fill="#14A774"/>
+      <g fill="#F7B32B"><circle cx="55" cy="99" r="14"/><circle cx="190" cy="99" r="14"/></g>
+      <g fill="#EF3E74"><circle cx="55" cy="99" r="7"/><circle cx="190" cy="99" r="7"/></g>
+      <path d="M123 76 L139 99 L123 122 L107 99 Z" fill="#F7B32B"/>
+      <circle cx="123" cy="99" r="5" fill="#fff"/>
+      <g fill="#fff" opacity=".9"><circle cx="34" cy="76" r="2.5"/><circle cx="76" cy="76" r="2.5"/><circle cx="34" cy="122" r="2.5"/><circle cx="76" cy="122" r="2.5"/><circle cx="170" cy="76" r="2.5"/><circle cx="210" cy="76" r="2.5"/><circle cx="170" cy="122" r="2.5"/><circle cx="210" cy="122" r="2.5"/></g>
+      <rect x="14" y="134" width="214" height="14" fill="#F7B32B"/>
+      <!-- cab -->
+      <path d="M232 62 H330 Q348 62 350 86 L352 148 H232 Z" fill="#C0263A"/>
+      <path d="M298 70 H328 Q340 70 342 92 H298 Z" fill="#BFE9FF"/>
+      <rect x="244" y="72" width="44" height="38" rx="3" fill="#F7B32B"/>
+      <circle cx="266" cy="91" r="9" fill="#14A774"/><circle cx="266" cy="91" r="4" fill="#EF3E74"/>
+      <rect x="232" y="134" width="120" height="14" fill="#F7B32B"/>
+      <rect x="344" y="118" width="12" height="10" rx="2" fill="#FFF4C2"/>
+      <!-- jhalar chains -->
+      <g stroke="#E8E2D2" stroke-width="1.2">
+        <path d="M24 148v10M40 148v13M56 148v10M72 148v13M88 148v10M104 148v13M120 148v10M136 148v13M152 148v10M168 148v13M184 148v10M200 148v13M216 148v10M244 148v10M260 148v13"/>
+      </g>
+      <g fill="#F7B32B"><circle cx="24" cy="160" r="2.2"/><circle cx="56" cy="160" r="2.2"/><circle cx="88" cy="160" r="2.2"/><circle cx="120" cy="160" r="2.2"/><circle cx="152" cy="160" r="2.2"/><circle cx="184" cy="160" r="2.2"/><circle cx="216" cy="160" r="2.2"/><circle cx="244" cy="160" r="2.2"/></g>
+      <g fill="#EF3E74"><circle cx="40" cy="163" r="2.2"/><circle cx="72" cy="163" r="2.2"/><circle cx="104" cy="163" r="2.2"/><circle cx="136" cy="163" r="2.2"/><circle cx="168" cy="163" r="2.2"/><circle cx="200" cy="163" r="2.2"/><circle cx="260" cy="163" r="2.2"/></g>
+      <!-- wheels -->
+      <g class="wheel"><circle cx="70" cy="160" r="22" fill="#151515"/><circle cx="70" cy="160" r="10" fill="#E8E2D2"/><path d="M70 150v20M60 160h20" stroke="#151515" stroke-width="3"/></g>
+      <g class="wheel"><circle cx="180" cy="160" r="22" fill="#151515"/><circle cx="180" cy="160" r="10" fill="#E8E2D2"/><path d="M180 150v20M170 160h20" stroke="#151515" stroke-width="3"/></g>
+      <g class="wheel"><circle cx="306" cy="160" r="22" fill="#151515"/><circle cx="306" cy="160" r="10" fill="#E8E2D2"/><path d="M306 150v20M296 160h20" stroke="#151515" stroke-width="3"/></g>
+    </svg>
+  </section>
+
+  <div class="jhalar" aria-hidden="true"></div>
+
+  <!-- ============ QUESTS (work) ============ -->
+  <section class="block" id="quests">
+    <div class="wrap">
+      <div class="sec-head"><h2>Quest log</h2><span class="urdu" lang="ur">مہمات</span></div>
+      <p class="sec-lede">What I'm building at the day job, and what each quest taught me.</p>
+      <div class="quests">
+        <ul class="quest-list" id="questList" role="tablist" aria-label="Quests"></ul>
+        <div class="sys quest-detail" id="questDetail" role="tabpanel" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTERS (blog + Medium) ============ -->
+  <section class="block" id="chapters">
+    <div class="wrap">
+      <div class="sec-head"><h2>Chapters</h2><span class="urdu" lang="ur">ابواب</span></div>
+      <p class="sec-lede">Everything I've written, numbered like the webnovel it is. Medium posts pull in automatically.</p>
+      <div class="filters" id="filters" role="group" aria-label="Filter chapters"></div>
+      <ol class="toc" id="toc" reversed></ol>
+      <p class="toc-note" id="tocNote"></p>
+    </div>
+  </section>
+
+  <!-- ============ LIBRARY ============ -->
+  <section class="block" id="library">
+    <div class="wrap">
+      <div class="sec-head"><h2>Library</h2><span class="urdu" lang="ur">کتب خانہ</span></div>
+      <p class="sec-lede">I get bored easily, so I read. A lot. Webnovels, manhwa, light novels, and the occasional real book. Pick a spine.</p>
+      <div class="shelf" id="shelf" role="group" aria-label="Bookshelf"></div>
+      <div class="spine-card" id="spineCard" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<div class="jhalar foot-jhalar" aria-hidden="true"></div>
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <ul class="foot-links" id="footLinks"></ul>
+  </div>
+</footer>
+<p class="fine" id="fine"></p>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+<script src="assets/common.js"></script>
+<script>
+/* =====================================================================
+   All content lives in the content/ folder (profile, quests, chapters,
+   library). You shouldn't need to edit anything below.
+   ===================================================================== */
+const emph = (s) => esc(s).replace(/\*(.+?)\*/g, "<em>$1</em>");   // *word* → highlighted
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- hero ---------- */
+let MESSAGE = "Ding! Truck-kun has delivered you to another world.";
+function renderProfile(p) {
+  const first = String(p.name || "").split(" ");
+  $("#heroName").innerHTML = `<span>${esc(first[0])}</span><span>${esc(first.slice(1).join(" "))}</span>`;
+  $("#heroIntro").innerHTML = emph(p.intro);
+  $("#statTable").innerHTML = list(p.status).map(r =>
+    `<tr><th scope="row">${esc(r.label)}</th><td class="${r.debuff ? "debuff" : ""}">${esc(r.value)}</td></tr>`).join("");
+  $("#bars").innerHTML = list(p.stats).map(s => `
+    <div class="bar ${s.low ? "low" : ""}">
+      <span>${esc(s.label)}</span>
+      <div class="bar-track" role="meter" aria-label="${esc(s.label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${+s.value || 0}"><div class="bar-fill" data-w="${Math.min(100, +s.value || 0)}"></div></div>
+      <span class="bar-val">${esc(s.display ?? s.value)}</span>
+    </div>`).join("");
+  $("#skills").innerHTML = list(p.skills).map(s => `<li>${esc(s)}</li>`).join("");
+  $("#footLinks").innerHTML = list(p.links).map(l => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a></li>`).join("");
+  $("#fine").textContent = `© ${new Date().getFullYear()} ${p.name}. Fasla rakhein. Keep a safe distance from my side projects.`;
+  document.title = p.name;
+  MESSAGE = `Ding! Truck-kun has delivered you to another world. You have entered the domain of ${first[0]}.`;
+}
+
+let typeTimer;
+function typeMessage(text) {
+  const el = $("#sysMsg"); clearInterval(typeTimer);
+  if (reduced) { el.textContent = text; return; }
+  let i = 0; el.innerHTML = '<span class="cursor"></span>';
+  typeTimer = setInterval(() => {
+    i++; el.innerHTML = esc(text.slice(0, i)) + '<span class="cursor"></span>';
+    if (i >= text.length) clearInterval(typeTimer);
+  }, 22);
+}
+function fillBars(on) { document.querySelectorAll("#bars .bar-fill").forEach(b => b.style.width = on ? b.dataset.w + "%" : "0"); }
+
+let seqTimers = [];
+function playIntro() {
+  seqTimers.forEach(clearTimeout); seqTimers = [];
+  const truck = $("#truck"), wrap = $("#sysWrap");
+  if (reduced) { wrap.classList.add("open", "settled"); fillBars(true); typeMessage(MESSAGE); return; }
+  wrap.classList.remove("open", "settled", "impact"); fillBars(false); $("#sysMsg").textContent = "";
+  truck.classList.remove("drive"); void truck.getBoundingClientRect(); truck.classList.add("drive");
+  seqTimers.push(setTimeout(() => { wrap.classList.add("open", "impact"); typeMessage(MESSAGE); }, 1050));
+  seqTimers.push(setTimeout(() => fillBars(true), 1500));
+  seqTimers.push(setTimeout(() => { wrap.classList.add("settled"); truck.classList.remove("drive"); }, 2400));
+}
+$("#replay").addEventListener("click", playIntro);
+$("#truck").addEventListener("animationend", e => { if (e.animationName === "drive") e.currentTarget.classList.remove("drive"); });
+$("#accept").addEventListener("click", () => { toast("[System] Quest accepted. Reward: reading material."); $("#quests").scrollIntoView(); });
+$("#decline").addEventListener("click", () => { typeMessage("Declining is not an option. The System has accepted on your behalf."); setTimeout(() => $("#quests").scrollIntoView(), reduced ? 600 : 2200); });
+
+/* ---------- quests ---------- */
+let QUESTS = [];
+function renderQuest(i) {
+  const q = QUESTS[i]; if (!q) return;
+  document.querySelectorAll(".quest-btn").forEach((b, j) => { b.setAttribute("aria-selected", j === i); b.tabIndex = j === i ? 0 : -1; });
+  $("#questDetail").innerHTML = `
+    <div class="sys-head">[ ${esc(String(q.kind || "Main").toUpperCase())} QUEST · ${esc(String(q.status || "").toUpperCase())} ]</div>
+    <div class="sys-body">
+      <h3>${esc(q.title)}</h3>
+      <p>${esc(q.summary)}</p>
+      ${list(q.rewards).length ? `<h4>Rewards</h4><ul class="rewards">${list(q.rewards).map(r => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}
+      ${list(q.stack).length ? `<h4>Equipment</h4><ul class="skills">${list(q.stack).map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
+      ${/^https?:\/\//i.test(q.url || "") ? `<a class="sys-btn quest-link" href="${esc(q.url)}" target="_blank" rel="noopener">[ Visit project ↗ ]</a>` : ""}
+    </div>`;
+}
+function renderQuests(data) {
+  QUESTS = list(data);
+  $("#questList").innerHTML = QUESTS.map((q, i) => {
+    const cleared = /^cleared$/i.test(q.status || ""), side = /^side$/i.test(q.kind || "");
+    return `<li role="presentation"><button class="quest-btn" role="tab" type="button" data-i="${i}">
+      <span class="q-kind ${side ? "side" : ""}">${side ? "Side" : "Main"} quest</span>
+      <span class="q-title">${esc(q.title)}</span>
+      <span class="q-status ${cleared ? "cleared" : ""}">${cleared ? "✓ Cleared" : "◌ " + esc(q.status || "In progress")}</span>
+    </button></li>`;
+  }).join("");
+  renderQuest(0);
+}
+$("#questList").addEventListener("click", e => { const b = e.target.closest(".quest-btn"); if (b) renderQuest(+b.dataset.i); });
+$("#questList").addEventListener("keydown", e => {
+  if (!["ArrowDown", "ArrowUp"].includes(e.key)) return;
+  e.preventDefault();
+  const btns = [...document.querySelectorAll(".quest-btn")]; let i = btns.indexOf(document.activeElement);
+  i = (i + (e.key === "ArrowDown" ? 1 : -1) + btns.length) % btns.length; btns[i].focus(); renderQuest(i);
+});
+
+/* ---------- chapters ---------- */
+let allPosts = [], filter = "All";
+function renderChapters() {
+  const sorted = [...allPosts].sort((a, b) => toDate(a.date) - toDate(b.date));
+  sorted.forEach((p, i) => p.ch = i + 1);
+  const shown = sorted.filter(p => filter === "All" || p.source === filter).reverse();
+  const sources = ["All", ...new Set(sorted.map(p => p.source))];
+  $("#filters").innerHTML = sources.map(s => `<button class="chip" type="button" aria-pressed="${s === filter}" data-f="${esc(s)}">${esc(s)}</button>`).join("");
+  $("#toc").innerHTML = shown.map(p => `
+    <li><a href="${esc(p.post ? postUrl(p.post) : p.url || "#")}" ${!p.post && /^https?:/.test(p.url) ? 'target="_blank" rel="noopener"' : ""}>
+      <span class="t-num">Ch. ${p.ch}</span>
+      <span><span class="t-title">${esc(p.title)}</span>${p.excerpt ? `<span class="t-ex">${esc(p.excerpt)}</span>` : ""}</span>
+      <span class="t-meta"><span class="t-src">${esc(p.source)}</span>${fmtDate(p.date)}${p.minutes ? ` · ${esc(p.minutes)} min` : ""}</span>
+    </a></li>`).join("") || `<li style="padding:1.2rem 0;color:var(--ink-dim)">No chapters here yet. The author is probably reading instead.</li>`;
+}
+$("#filters").addEventListener("click", e => { const b = e.target.closest(".chip"); if (b) { filter = b.dataset.f; renderChapters(); } });
+
+async function loadMedium(username) {
+  if (!username) return;
+  const feed = `https://medium.com/feed/@${String(username).replace(/^@/, "")}`;
+  try {
+    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}`);
+    const data = await res.json();
+    if (data.status !== "ok") throw new Error("feed");
+    const tmp = document.createElement("div");
+    const items = data.items.map(it => {
+      tmp.innerHTML = it.description || it.content || "";
+      const text = tmp.textContent.replace(/\s+/g, " ").trim();
+      const words = (it.content || it.description || "").replace(/<[^>]+>/g, " ").split(/\s+/).length;
+      return { title: it.title, date: it.pubDate.replace(" ", "T") + "Z", url: it.link, source: "Medium",
+               excerpt: text.slice(0, 140) + (text.length > 140 ? "…" : ""), minutes: Math.max(1, Math.round(words / 230)) };
+    });
+    const bare = (u) => String(u || "").split("?")[0].replace(/\/$/, "");   // Medium adds ?source=rss… to feed links
+    const known = new Set(allPosts.map(p => bare(p.url)));
+    allPosts = allPosts.filter(p => p.source !== "Medium" || p.url !== "#").concat(items.filter(i => !known.has(bare(i.url))));
+    renderChapters();
+    $("#tocNote").textContent = `${items.length} chapters synced from Medium.`;
+  } catch (e) {
+    $("#tocNote").textContent = "Couldn't reach Medium just now, so you're seeing the saved chapters.";
+  }
+}
+
+/* ---------- library ---------- */
+let BOOKS = [];
+const spineColors = [["--crimson", "--marigold"], ["--emerald", "--ink"], ["--marigold", "--bg-deep"], ["--rose", "--ink"], ["--bg-2", "--marigold"]];
+const heights = [230, 260, 210, 280, 245, 220, 270, 235];
+function renderLibrary(data) {
+  BOOKS = list(data);
+  $("#shelf").innerHTML = BOOKS.map((b, i) => {
+    const [bg, fg] = spineColors[i % spineColors.length];
+    return `<button class="spine ${/^dropped$/i.test(b.status || "") ? "dropped" : ""}" type="button" data-i="${i}" aria-pressed="false"
+      style="height:${heights[i % heights.length]}px;background:var(${bg});color:var(${fg})">${esc(b.title)}</button>`;
+  }).join("");
+  renderBook(0);
+}
+function renderBook(i) {
+  const b = BOOKS[i]; if (!b) return;
+  document.querySelectorAll(".spine").forEach((s, j) => s.setAttribute("aria-pressed", j === i));
+  $("#spineCard").innerHTML = `<h3>${esc(b.title)}</h3>
+    <span class="k">Type</span><span class="v">${esc(b.type)}</span>
+    <span class="k">Status</span><span class="v">${esc(b.status)}</span>
+    ${b.note ? `<span class="k">Verdict</span><span class="v">${esc(b.note)}</span>` : ""}`;
+}
+$("#shelf").addEventListener("click", e => { const s = e.target.closest(".spine"); if (s) renderBook(+s.dataset.i); });
+
+/* ---------- boot ---------- */
+(async () => {
+  if (!window.jsyaml) { document.querySelector("main").insertAdjacentHTML("afterbegin", problem("The YAML reader didn't load. Check your connection and reload.")); return; }
+  const [profile, quests, chapters, library] = await Promise.all(
+    ["profile", "quests", "chapters", "library"].map(load));
+
+  if (profile.error) $("#sysMsg").innerHTML = problem(profile.error); else renderProfile(profile.data || {});
+  playIntro();
+
+  if (quests.error) $("#questList").outerHTML = problem(quests.error); else renderQuests(quests.data);
+  if (chapters.error) $("#tocNote").innerHTML = problem(chapters.error);
+  allPosts = list(chapters.data).map(p => ({ source: "Blog", ...p })); renderChapters();
+  if (!profile.error) loadMedium(profile.data?.medium_username);
+  if (library.error) $("#shelf").outerHTML = problem(library.error); else renderLibrary(library.data);
+})();
+</script>
+</body>
+</html>

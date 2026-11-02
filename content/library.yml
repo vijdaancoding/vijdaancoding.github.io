@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────
+# LIBRARY: what you're reading. Shown left to right in this order.
+#
+# Copy this block to add a book:
+#
+#   - title: "Book title"
+#     type: Webnovel          # Webnovel, Manhwa, Light novel, Book, Urdu novel…
+#     status: Reading         # Reading, Finished or Dropped (dropped = faded)
+#     note: "Your one-line verdict."
+# ─────────────────────────────────────────────────────────────
+
+- title: "ML with Scikit-Learn, Keras and TF by Aurelien Geron"
+  type: Book
+  status: Finished
+  note: "I swear I won a hackathon just by reading this."
+
+- title: "Lord of the Mysteries"
+  type: Webnovel
+  status: Finished
+  note: "The best worldbuilding I've read. Slow start, worth it."
+
+- title: "AI Engineering by Chip Huyen"
+  type: Book
+  status: Finished
+  note: "Where I realized I should pick up System Design"
+
+- title: "Sakamoto Days"
+  type: Manga
+  status: Ongoing
+  note: "John Wick but chubbier"
+
+- title: "War of Art by Steven Pressfield"
+  type: Novel
+  status: Finished
+  note: "I found out why I keep on leaving my side-projects unfinished."
+
+- title: "Design Patterns by Erich Gamma"
+  type: Book
+  status: Finished
+  note: "I swear I was forced to read this but by the end I learned a lot."
+
+- title: "Dozakhnama by Rabisankar Bal"
+  type: Novel
+  status: Finished
+  note: "Couldn't stop underlining all the amazing conversations"
+
+- title: "Prisoners of Geography by Tim Marshall"
+  type: Novel
+  status: Finished
+  note: "Gives clarity to the current conflicts of the world."
+
+- title: "Notes from Underground by Fyodor Dostoevesky"
+  type: Novel
+  status: Reading
+  note: "Portrays a version of human I wish I never become."
