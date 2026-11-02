@@ -31,8 +31,6 @@ Inside the post you can use:
 - **Math (LaTeX)**: `$inline$` and `$$display$$`, or a ` ```math ` fence. Same syntax GitHub uses, so the file previews correctly on github.com too.
 - **Pictures**: upload them to `content/posts/images/` and write `![description](images/photo.jpg "optional caption")`. Images from other sites work with their full `https://` address.
 
-`content/posts/example.md` shows all of it. Delete it and its `chapters.yml` entry once you've got the hang of it.
-
 **Drafts:** a `.md` file that isn't in `chapters.yml` isn't listed anywhere, but you can still open `post.html?p=its-name` to preview it. Put a `# Title` line at the top of a draft if you want it to have a title before it's listed.
 
 **Also on Medium:** if you publish the same post on Medium, add its link as `url:` on the entry. The post shows an "Also on Medium" link, and the Medium sync won't list it twice.

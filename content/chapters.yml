@@ -29,8 +29,6 @@
 #     excerpt: "One line about the post."
 # ─────────────────────────────────────────────────────────────
 
-# Example: shows off Markdown, code, math and pictures. Delete it
-# (and content/posts/example.md) once your first real chapter is up.
 - title: "Using Terraform to Create IAM, VPC and EC2 Instances."
   date: 2025-12-31
   source: Medium

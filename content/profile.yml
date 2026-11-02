@@ -8,15 +8,17 @@ intro: "Developer from Pakistan. I build things at work, I'm *chronically online
 
 # Your Medium username, without the @. Posts appear in Chapters automatically.
 # Leave it empty ("") to show only what's in chapters.yml.
-medium_username: ""
+medium_username: "alivijdaan"
 
 links:
   - label: GitHub
     url: https://github.com/vijdaancoding
   - label: Medium
-    url: https://medium.com/          # ← your Medium profile
+    url: https://medium.com/@alivijdaan
   - label: LinkedIn
-    url: https://www.linkedin.com/    # ← your LinkedIn profile
+    url: https://www.linkedin.com/in/alivijdaan/
+  - label: Email
+    url: alivijdaan@gmail.com       # an email address works as-is; it opens the visitor's mail app
 
 # Rows in the status window. Add `debuff: true` to show a row in pink.
 status:

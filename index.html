@@ -4,7 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ali Vijdaan</title>
-<meta name="description" content="Ali Vijdaan — developer, webnovel reader, chai enthusiast. Writing, work quests and what I'm reading.">
+<meta name="description" content="Ali Vijdaan, AI Engineer from Pakistan. Work quests, writing, and the novels I read after hours.">
+<link rel="canonical" href="https://vijdaancoding.github.io/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0F1538">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ali Vijdaan">
+<meta property="og:title" content="Ali Vijdaan · AI Engineer">
+<meta property="og:description" content="Ali Vijdaan, AI Engineer from Pakistan. Work quests, writing, and the novels I read after hours.">
+<meta property="og:url" content="https://vijdaancoding.github.io/">
+<meta property="og:image" content="https://vijdaancoding.github.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ali Vijdaan, AI Engineer: a status window listing Python, ML/DL, AWS, Docker, Terraform and n8n">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;600&family=Lalezar&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
@@ -330,7 +345,10 @@ function renderProfile(p) {
       <span class="bar-val">${esc(s.display ?? s.value)}</span>
     </div>`).join("");
   $("#skills").innerHTML = list(p.skills).map(s => `<li>${esc(s)}</li>`).join("");
-  $("#footLinks").innerHTML = list(p.links).map(l => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a></li>`).join("");
+  $("#footLinks").innerHTML = list(p.links).map(l => {
+    const url = String(l.url || ""), mail = url.includes("@") && !/^\w+:/.test(url) ? "mailto:" + url : url;   // a bare email address becomes a mailto: link
+    return `<li><a href="${esc(mail)}" ${/^https?:/i.test(mail) ? 'target="_blank" rel="noopener"' : ""}>${esc(l.label)}</a></li>`;
+  }).join("");
   $("#fine").textContent = `© ${new Date().getFullYear()} ${p.name}. Fasla rakhein. Keep a safe distance from my side projects.`;
   document.title = p.name;
   MESSAGE = `Ding! Truck-kun has delivered you to another world. You have entered the domain of ${first[0]}.`;
